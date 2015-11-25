@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Color Blindness Simulator</title>
+
+<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="math.min.js"></script>
+
+<script type="text/javascript" src="canvas.js"></script>
+<script type="text/javascript" src="pixel.js"></script>
+<script type="text/javascript" src="filters.js"></script>
+<script type="text/javascript" src="colorblind.js"></script>
+
+<link rel="stylesheet" type="text/css" href="colorblind.css">
+
+</head>
+<body>
+<div id="body-wrapper">
+
+<div id="header-wrapper">
+  <h1>Color Blindness Simulator</h1>
+</div>
+
+<div id="filter-wrapper">
+  <p>
+    Remove filter:
+    <button id="reset">Reset</button>
+  </p>
+  <p>
+    Simulate color blindness:
+    <button id="applyProtanopia">Protanopia</button>
+    <button id="applyProtanomaly">Protanomaly</button>
+    <button id="applyDeuteranopia">Deuteranopia</button>
+    <button id="applyDeuteranomaly">Deuteranomaly</button>
+    <button id="applyTritanopia">Tritanopia</button>
+    <button id="applyTritanomaly">Tritanomaly</button>
+    <button id="applyAchromatopsia">Achromatopsia</button>
+    <button id="applyAchromatomaly">Achromatomaly</button>
+  </p>
+  <p>
+    Other fun operations:
+    <button id="removeConeL">Remove Cone L</button>
+    <button id="removeConeM">Remove Cone M</button>
+    <button id="removeConeS">Remove Cone S</button>
+    <button id="grayscale">Grayscale</button>
+    <button id="rotateRGB">Rotate RGB</button>
+  </p>
+</div>
+
+<div id="load-wrapper">
+  Choose a different image:
+  <input id="image-file" type="file" />
+</div>
+
+<div id="canvas-wrapper">
+  <canvas id="canvas" init="nature.jpg"></canvas>
+</div>
+
+</div>
+</body>
+</html>
+
