@@ -1,5 +1,5 @@
 # colorblind
-A mobile-friendly web-based Rubik's Cube with a built-in solver using [three.js](http://threejs.org/) and [jQuery](https://jquery.com/).
+A web-based color blindness simulator using WebGL, [jQuery](https://jquery.com/), and [math.js](http://mathjs.org/).
 
 ![Nature image](nature.jpg?raw=true "Nature image")
 
