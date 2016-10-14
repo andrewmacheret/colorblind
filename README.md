@@ -4,9 +4,9 @@
 
 A web-based color blindness simulator using WebGL, [jQuery](https://jquery.com/), and [math.js](http://mathjs.org/).
 
-![Nature image](www/nature.jpg?raw=true "Nature image")
-
 See it running at [https://andrewmacheret.com/projects/colorblind](https://andrewmacheret.com/projects/colorblind).
+
+![Nature image](www/nature.jpg?raw=true "Nature image")
 
 Prereqs:
 * A web server (like [Apache](https://httpd.apache.org/)).
