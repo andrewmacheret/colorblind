@@ -1,7 +1,10 @@
 # colorblind
+
+[![Build Status](https://travis-ci.org/andrewmacheret/colorblind.svg?branch=master)](https://travis-ci.org/andrewmacheret/colorblind) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/colorblind/blob/master/LICENSE.md)
+
 A web-based color blindness simulator using WebGL, [jQuery](https://jquery.com/), and [math.js](http://mathjs.org/).
 
-![Nature image](nature.jpg?raw=true "Nature image")
+![Nature image](www/nature.jpg?raw=true "Nature image")
 
 See it running at [http://andrewmacheret.com/projects/colorblind/](http://andrewmacheret.com/projects/colorblind/).
 
