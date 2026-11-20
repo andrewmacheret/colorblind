@@ -17,3 +17,8 @@
 #canvas-wrapper {
   margin-top: 10px;
 }
+
+/* shrink big photos to fit small screens */
+#canvas {
+  max-width: 100%;
+}

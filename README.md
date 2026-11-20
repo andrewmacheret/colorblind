@@ -1,21 +1,22 @@
 # colorblind
 
-[![Build Status](https://travis-ci.org/andrewmacheret/colorblind.svg?branch=master)](https://travis-ci.org/andrewmacheret/colorblind) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/colorblind/blob/master/LICENSE.md)
+[![Deploy](https://github.com/andrewmacheret/colorblind/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/colorblind/actions/workflows/deploy.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/colorblind/blob/master/LICENSE.md)
 
-A web-based color blindness simulator using WebGL, [jQuery](https://jquery.com/), and [math.js](http://mathjs.org/).
+A web-based color blindness simulator, in plain JavaScript with an HTML canvas. No libraries.
 
-See it running at [https://andrewmacheret.com/projects/colorblind](https://andrewmacheret.com/projects/colorblind).
+See it running at [https://andrewmacheret.com/projects/colorblind/](https://andrewmacheret.com/projects/colorblind/).
 
 ![Nature image](www/nature.jpg?raw=true "Nature image")
 
-Prereqs:
-* A web server (like [Apache](https://httpd.apache.org/)).
+## Run it locally
 
-Installation steps:
-* `git clone <clone url>`
+```
+cd www
+python3 -m http.server
+```
 
-Test it:
-* Open `index.html` in a browser.
- * For testing purposes, if you don't have a web server, running `python -m SimpleHTTPServer` in the project directory and navigating to [http://localhost:8000](http://localhost:8000) should do the trick.
-* You should see a test image and a lot of buttons, and those buttons should change the appearance of the image.
-* To troubleshoot, look for javascript errors in the browser console.
+Then open [http://localhost:8000](http://localhost:8000). You should see a test image and a lot of buttons, and those buttons should change the appearance of the image.
+
+## Deploy
+
+Pushing to `master` runs [GitHub Actions](.github/workflows/deploy.yml), which syncs `www/` to `s3://andrewmacheret.com/projects/colorblind` and clears the CloudFront cache. It signs in to AWS with GitHub OIDC using the role in the `AWS_ROLE_ARN` repo variable.

@@ -61,7 +61,31 @@ Pixel.RGBtoLMS = [
   [ 0.02996, 0.18431, 1.4670, 0 ],
   [ 0, 0, 0, 1]
 ];
-Pixel.LMStoRGB = math.inv(Pixel.RGBtoLMS);
+// invert a square matrix with Gauss-Jordan elimination
+Pixel.invert = function(matrix) {
+  var n = matrix.length;
+  var a = matrix.map(function(row, i) {
+    return row.concat(row.map(function(_, j) { return i === j ? 1 : 0; }));
+  });
+  for (var col = 0; col < n; col++) {
+    // swap in the row with the biggest value in this column, so we never divide by ~0
+    var pivot = col;
+    for (var row = col + 1; row < n; row++) {
+      if (Math.abs(a[row][col]) > Math.abs(a[pivot][col])) pivot = row;
+    }
+    var tmp = a[col]; a[col] = a[pivot]; a[pivot] = tmp;
+
+    var scale = a[col][col];
+    a[col] = a[col].map(function(v) { return v / scale; });
+    for (var other = 0; other < n; other++) {
+      if (other === col) continue;
+      var factor = a[other][col];
+      a[other] = a[other].map(function(v, j) { return v - factor * a[col][j]; });
+    }
+  }
+  return a.map(function(row) { return row.slice(n); });
+};
+Pixel.LMStoRGB = Pixel.invert(Pixel.RGBtoLMS);
 Pixel.protanopiaLMS = [
   [ 0, 2.02344, -2.52581, 0 ],
   [ 0, 1, 0, 0 ],
