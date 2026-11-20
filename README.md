@@ -15,7 +15,7 @@ cd www
 python3 -m http.server
 ```
 
-Then open [http://localhost:8000](http://localhost:8000). You should see a test image and a lot of buttons, and those buttons should change the appearance of the image.
+Then open [http://localhost:8000](http://localhost:8000). You should see a test image and a lot of buttons, and those buttons should change the appearance of the image. The dropdown switches between the sample images in `www/`, or you can load your own.
 
 ## Deploy
 

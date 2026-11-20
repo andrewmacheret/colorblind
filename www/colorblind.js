@@ -15,7 +15,16 @@ window.addEventListener('load', function() {
     }
   });
 
-  document.getElementById('image-file').addEventListener('change', function() {
+  var imageChoice = document.getElementById('image-choice');
+  var imageFile = document.getElementById('image-file');
+
+  imageChoice.addEventListener('change', function() {
+    // clear the file box so picking the same file again still works
+    imageFile.value = '';
+    Canvas.loadImage(imageChoice.value);
+  });
+
+  imageFile.addEventListener('change', function() {
     var file = this.files[0];
     if (!file) {
       // no file selected
@@ -25,6 +34,5 @@ window.addEventListener('load', function() {
     Canvas.loadFile(file);
   });
 
-  var canvas = document.getElementById('canvas');
-  Canvas.init(canvas, canvas.getAttribute('init'));
+  Canvas.init(document.getElementById('canvas'), imageChoice.value);
 });

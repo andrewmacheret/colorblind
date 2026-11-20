@@ -56,12 +56,22 @@
 </div>
 
 <div id="load-wrapper">
-  Choose a different image:
-  <input id="image-file" type="file" />
+  <label for="image-choice">Choose an image:</label>
+  <select id="image-choice">
+    <option value="nature.jpg">Nature</option>
+    <option value="bird.jpg">Birds</option>
+    <option value="pencils.jpg">Colored pencils</option>
+    <option value="jelly.png">Jellyfish</option>
+    <option value="sky.jpg">Sky</option>
+    <option value="redgreen.jpg">Color blindness test plate</option>
+    <option value="simplecolorblindtest.png">Color chart</option>
+  </select>
+  <label for="image-file">or use your own:</label>
+  <input id="image-file" type="file" accept="image/*" />
 </div>
 
 <div id="canvas-wrapper">
-  <canvas id="canvas" init="nature.jpg"></canvas>
+  <canvas id="canvas"></canvas>
 </div>
 
 </div>
