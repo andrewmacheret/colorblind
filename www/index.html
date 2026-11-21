@@ -20,6 +20,7 @@
 <script src="filters.js" defer></script>
 <script src="colorblind.js" defer></script>
 
+<link rel="stylesheet" href="https://andrewmacheret.com/projects.css">
 <link rel="stylesheet" type="text/css" href="colorblind.css">
 </head>
 <body>
@@ -30,7 +31,7 @@
       <p>See a photo the way people with color blindness see it.</p>
     </div>
     <div class="image-controls">
-      <select id="image-choice" aria-label="Sample image">
+      <select id="image-choice" class="select" aria-label="Sample image">
         <option value="nature.jpg">Nature</option>
         <option value="bird.jpg">Birds</option>
         <option value="pencils.jpg">Colored pencils</option>
@@ -74,7 +75,7 @@
       </div>
     </section>
 
-    <aside class="panel" id="filters" aria-label="Filters"></aside>
+    <aside class="stage panel" id="filters" aria-label="Filters"></aside>
   </div>
 
   <footer class="footer">

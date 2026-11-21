@@ -44,6 +44,7 @@
       var section = document.createElement('div');
       section.className = 'group';
       var heading = document.createElement('h3');
+      heading.className = 'section-head';
       heading.textContent = group.name;
       var chips = document.createElement('div');
       chips.className = 'chips';
