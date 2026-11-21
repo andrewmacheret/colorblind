@@ -6,7 +6,9 @@ A web-based color blindness simulator, in plain JavaScript with an HTML canvas. 
 
 See it running at [https://andrewmacheret.com/projects/colorblind/](https://andrewmacheret.com/projects/colorblind/).
 
-![Nature image](www/nature.jpg?raw=true "Nature image")
+![Screenshot](www/screenshot.png?raw=true "Screenshot")
+
+Pick a sample photo or load your own (button, drag and drop, or paste), then pick a type of color blindness. Drag the slider to compare with the original, and save the result as a PNG. Each filter is a 3x3 color matrix in [`www/filters.js`](www/filters.js), applied in linear RGB, and the page URL remembers the filter, like `#deuteranopia`. The red-green and blue-yellow simulations use the matrices from [Machado, Oliveira and Fernandes (2009)](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html), at 100% severity for the "-opia" types and 60% for the "-anomaly" types.
 
 ## Run it locally
 
@@ -15,7 +17,7 @@ cd www
 python3 -m http.server
 ```
 
-Then open [http://localhost:8000](http://localhost:8000). You should see a test image and a lot of buttons, and those buttons should change the appearance of the image. The dropdown switches between the sample images in `www/`, or you can load your own.
+Then open [http://localhost:8000](http://localhost:8000). You should see a photo with filter buttons next to it, and the buttons should change how the photo looks. The dropdown switches between the sample images in `www/`.
 
 ## Deploy
 

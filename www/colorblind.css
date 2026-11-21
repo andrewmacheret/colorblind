@@ -1,24 +1,513 @@
-#background {
-  display: none;
+/* Same look as the cube, Monty Hall and NHL pages, with a light version for light mode */
+
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --bg: #0b1120;
+  --bg-gradient: radial-gradient(120% 70% at 50% 0%, #3b4a66 0%, #1e293b 45%, #0b1120 100%);
+  --text: #e2e8f0;
+  --bright: #f1f5f9;
+  --muted: #94a3b8;
+  --glass: rgb(255 255 255 / 0.05);
+  --glass-border: rgb(255 255 255 / 0.1);
+  --control: rgb(255 255 255 / 0.08);
+  --control-border: rgb(255 255 255 / 0.14);
+  --control-hover: rgb(255 255 255 / 0.15);
+  --shadow: 0 20px 50px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --control-shadow: 0 8px 24px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --image-shadow: 0 12px 30px rgb(0 0 0 / 0.4);
+  --link: #c4b5fd;
+  --link-hover: #ddd6fe;
+  --focus: #a5b4fc;
+  --error: #fca5a5;
+  color: var(--text);
+  background: var(--bg);
 }
 
-#header-wrapper {
-  margin-top: 10px;
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #e2e8f0;
+    --bg-gradient: radial-gradient(120% 70% at 50% 0%, #ffffff 0%, #eef2f7 45%, #dbe3ee 100%);
+    --text: #334155;
+    --bright: #0f172a;
+    --muted: #64748b;
+    --glass: rgb(255 255 255 / 0.65);
+    --glass-border: rgb(15 23 42 / 0.08);
+    --control: rgb(255 255 255 / 0.8);
+    --control-border: rgb(15 23 42 / 0.12);
+    --control-hover: #fff;
+    --shadow: 0 20px 50px rgb(15 23 42 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.8);
+    --control-shadow: 0 6px 18px rgb(15 23 42 / 0.08);
+    --image-shadow: 0 12px 30px rgb(15 23 42 / 0.18);
+    --link: #6d28d9;
+    --link-hover: #7c3aed;
+    --focus: #6366f1;
+    --error: #b91c1c;
+  }
 }
 
-#filter-wrapper {
-  margin-top: 10px;
+html,
+body {
+  margin: 0;
+  min-height: 100%;
 }
 
-#load-wrapper {
-  margin-top: 10px;
+body {
+  min-height: 100dvh;
+  background: var(--bg-gradient) no-repeat;
+  background-color: var(--bg);
 }
 
-#canvas-wrapper {
-  margin-top: 10px;
+h1,
+h2,
+h3,
+p {
+  margin: 0;
 }
 
-/* shrink big photos to fit small screens */
-#canvas {
+a:link,
+a:visited {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+a:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.app {
+  box-sizing: border-box;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: max(1.5rem, env(safe-area-inset-top)) 1rem max(1.5rem, env(safe-area-inset-bottom));
+}
+
+/* header with the image picker */
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header h1 {
+  color: var(--bright);
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.header p {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.image-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.image-controls select {
+  appearance: none;
+  -webkit-appearance: none;
   max-width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 1.1rem;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  /* a small down arrow, since appearance: none hides the browser's */
+  background: var(--control) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 1rem center;
+  box-shadow: var(--control-shadow);
+  color: var(--bright);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.image-controls select:hover {
+  background-color: var(--control-hover);
+}
+
+.image-controls option {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* pill buttons, same as the other pages */
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--control);
+  box-shadow: var(--control-shadow);
+  color: var(--bright);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.control:hover {
+  background: var(--control-hover);
+  transform: translateY(-1px);
+}
+
+.control:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.control:focus-visible,
+.upload:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.control.small {
+  padding: 0.5rem 0.95rem;
+  font-size: 0.85rem;
+}
+
+.control svg {
+  flex-shrink: 0;
+}
+
+/* the real file input is hidden, the label around it is the button */
+.upload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* image card on the left, filters on the right */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  align-items: start;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.stage,
+.panel {
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.stage {
+  padding: 1.25rem;
+}
+
+.viewer {
+  --ratio: 1.6;
+  --split: 50%;
+  position: relative;
+  width: min(100%, calc(68vh * var(--ratio)));
+  width: min(100%, calc(68dvh * var(--ratio)));
+  aspect-ratio: var(--ratio);
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--control);
+  box-shadow: var(--image-shadow);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.viewer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.viewer.empty canvas {
+  visibility: hidden;
+}
+
+/* the original sits on top, cut off at the split */
+#original {
+  position: absolute;
+  inset: 0;
+  display: none;
+  clip-path: inset(0 calc(100% - var(--split)) 0 0);
+}
+
+.viewer.comparing {
+  cursor: ew-resize;
+}
+
+.viewer.comparing #original {
+  display: block;
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split);
+  display: none;
+  width: 44px;
+  transform: translateX(-50%);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.viewer.comparing .divider {
+  display: block;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 8px rgb(0 0 0 / 0.5);
+  transform: translateX(-50%);
+}
+
+.handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: rgb(15 23 42 / 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.4);
+  color: #fff;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s;
+}
+
+.divider:hover .handle,
+.viewer.dragging .handle {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.divider:focus-visible {
+  outline: none;
+}
+
+.divider:focus-visible .handle {
+  box-shadow: 0 0 0 3px var(--focus), 0 4px 14px rgb(0 0 0 / 0.4);
+}
+
+.tag {
+  position: absolute;
+  top: 0.6rem;
+  display: none;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgb(15 23 42 / 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 650;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.viewer.comparing .tag {
+  display: block;
+}
+
+.tag-left {
+  left: 0.6rem;
+}
+
+.tag-right {
+  right: 0.6rem;
+}
+
+.drop-hint {
+  position: absolute;
+  inset: 0.5rem;
+  display: none;
+  place-items: center;
+  border: 2px dashed #fff;
+  border-radius: 10px;
+  background: rgb(15 23 42 / 0.6);
+  color: #fff;
+  font-weight: 650;
+  pointer-events: none;
+}
+
+body.dropping .drop-hint {
+  display: grid;
+}
+
+.error {
+  margin-top: 1rem;
+  color: var(--error);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.caption {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.caption h2 {
+  color: var(--bright);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.caption p {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+/* filter chips */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.25rem;
+}
+
+.group h3 {
+  margin-bottom: 0.55rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--control);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, transform 0.15s;
+}
+
+.chip:hover {
+  background: var(--control-hover);
+  color: var(--bright);
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.chip[aria-pressed='true'] {
+  border-color: transparent;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  box-shadow: 0 6px 18px rgb(99 102 241 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.25);
+  color: #fff;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .image-controls {
+    width: 100%;
+  }
+
+  .image-controls select {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .stage,
+  .panel {
+    padding: 0.75rem;
+    border-radius: 20px;
+  }
+
+  .viewer {
+    border-radius: 12px;
+  }
+
+  .caption {
+    flex-direction: column;
+    margin-top: 1rem;
+    padding: 0 0.25rem 0.25rem;
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control,
+  .chip,
+  .handle {
+    transition: none;
+  }
 }
