@@ -25,45 +25,6 @@
     loadId: 0
   };
 
-  var makeChip = function(filter) {
-    var chip = document.createElement('button');
-    chip.type = 'button';
-    chip.className = 'chip';
-    chip.dataset.filter = filter.id;
-    chip.textContent = filter.name;
-    return chip;
-  };
-
-  var buildPanel = function() {
-    var top = document.createElement('div');
-    top.className = 'chips';
-    top.appendChild(makeChip(Filters.normal));
-    panel.appendChild(top);
-
-    Filters.groups.forEach(function(group) {
-      var section = document.createElement('div');
-      section.className = 'group';
-      var heading = document.createElement('h3');
-      heading.className = 'section-head';
-      heading.textContent = group.name;
-      var chips = document.createElement('div');
-      chips.className = 'chips';
-      chips.setAttribute('role', 'group');
-      chips.setAttribute('aria-label', group.name);
-      group.filters.forEach(function(filter) {
-        chips.appendChild(makeChip(filter));
-      });
-      section.appendChild(heading);
-      section.appendChild(chips);
-      panel.appendChild(section);
-    });
-
-    panel.addEventListener('click', function(event) {
-      var chip = event.target.closest('[data-filter]');
-      if (chip) setFilter(Filters.find(chip.dataset.filter));
-    });
-  };
-
   var render = function() {
     var filter = state.filter;
     var comparing = filter !== Filters.normal;
@@ -208,6 +169,11 @@
     event.preventDefault();
   });
 
+  panel.addEventListener('click', function(event) {
+    var chip = event.target.closest('[data-filter]');
+    if (chip) setFilter(Filters.find(chip.dataset.filter));
+  });
+
   // loading images
 
   imageChoice.addEventListener('change', function() {
@@ -259,7 +225,6 @@
     setFilter(Filters.find(location.hash.slice(1)) || Filters.normal);
   });
 
-  buildPanel();
   setSplit(50);
   viewer.classList.add('empty');
   render();

@@ -65,8 +65,8 @@
       <p class="error" id="error" role="alert" hidden></p>
       <div class="caption">
         <div aria-live="polite">
-          <h2 id="filter-name"></h2>
-          <p id="filter-about"></p>
+          <h2 id="filter-name">Normal vision</h2>
+          <p id="filter-about">Pick a type of color blindness to see how this image looks with it.</p>
         </div>
         <button class="control small" id="save" type="button">
           <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5V13M6 9l4 4 4-4M3.5 12.5v2a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -75,7 +75,44 @@
       </div>
     </section>
 
-    <aside class="stage panel" id="filters" aria-label="Filters"></aside>
+    <!-- written out here, not built in JS, so the page doesn't jump when the script runs. Ids and names must match filters.js -->
+    <aside class="stage panel" id="filters" aria-label="Filters">
+      <div class="chips">
+        <button type="button" class="chip" data-filter="normal" aria-pressed="true">Normal vision</button>
+      </div>
+      <div class="group">
+        <h3 class="section-head">Red-green</h3>
+        <div class="chips" role="group" aria-label="Red-green">
+          <button type="button" class="chip" data-filter="protanopia" aria-pressed="false">Protanopia</button>
+          <button type="button" class="chip" data-filter="protanomaly" aria-pressed="false">Protanomaly</button>
+          <button type="button" class="chip" data-filter="deuteranopia" aria-pressed="false">Deuteranopia</button>
+          <button type="button" class="chip" data-filter="deuteranomaly" aria-pressed="false">Deuteranomaly</button>
+        </div>
+      </div>
+      <div class="group">
+        <h3 class="section-head">Blue-yellow</h3>
+        <div class="chips" role="group" aria-label="Blue-yellow">
+          <button type="button" class="chip" data-filter="tritanopia" aria-pressed="false">Tritanopia</button>
+          <button type="button" class="chip" data-filter="tritanomaly" aria-pressed="false">Tritanomaly</button>
+        </div>
+      </div>
+      <div class="group">
+        <h3 class="section-head">No color</h3>
+        <div class="chips" role="group" aria-label="No color">
+          <button type="button" class="chip" data-filter="achromatopsia" aria-pressed="false">Achromatopsia</button>
+          <button type="button" class="chip" data-filter="achromatomaly" aria-pressed="false">Achromatomaly</button>
+        </div>
+      </div>
+      <div class="group">
+        <h3 class="section-head">Just for fun</h3>
+        <div class="chips" role="group" aria-label="Just for fun">
+          <button type="button" class="chip" data-filter="no-l-cones" aria-pressed="false">No L cones</button>
+          <button type="button" class="chip" data-filter="no-m-cones" aria-pressed="false">No M cones</button>
+          <button type="button" class="chip" data-filter="no-s-cones" aria-pressed="false">No S cones</button>
+          <button type="button" class="chip" data-filter="rotate-rgb" aria-pressed="false">Rotate RGB</button>
+        </div>
+      </div>
+    </aside>
   </div>
 
   <footer class="footer">

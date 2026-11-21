@@ -1,9 +1,5 @@
 /* Colors, cards, buttons and the footer come from https://andrewmacheret.com/projects.css */
 
-:root {
-  --image-shadow: 0 12px 30px light-dark(rgb(15 23 42 / 0.18), rgb(0 0 0 / 0.4));
-}
-
 .app {
   max-width: 1040px;
 }
@@ -46,7 +42,8 @@
 }
 
 .viewer {
-  --ratio: 1.6;
+  /* size of nature.jpg, the first sample, so the box doesn't jump when it loads */
+  --ratio: 600 / 326;
   --split: 50%;
   position: relative;
   width: min(100%, calc(68vh * var(--ratio)));
@@ -56,7 +53,7 @@
   overflow: hidden;
   border-radius: 14px;
   background: var(--control);
-  box-shadow: var(--image-shadow);
+  box-shadow: var(--media-shadow);
   user-select: none;
   -webkit-user-select: none;
 }
@@ -125,7 +122,7 @@
   height: 2.5rem;
   border: 2px solid #fff;
   border-radius: 999px;
-  background: rgb(15 23 42 / 0.55);
+  background: var(--scrim);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 14px rgb(0 0 0 / 0.4);
@@ -153,7 +150,7 @@
   display: none;
   padding: 0.25rem 0.7rem;
   border-radius: 999px;
-  background: rgb(15 23 42 / 0.6);
+  background: var(--scrim);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #fff;
@@ -182,7 +179,7 @@
   place-items: center;
   border: 2px dashed #fff;
   border-radius: 10px;
-  background: rgb(15 23 42 / 0.6);
+  background: var(--scrim);
   color: #fff;
   font-weight: 650;
   pointer-events: none;
@@ -265,7 +262,7 @@ body.dropping .drop-hint {
   border-color: transparent;
   background: var(--gradient);
   box-shadow: var(--gradient-shadow);
-  color: #fff;
+  color: var(--on-gradient);
 }
 
 @media (max-width: 860px) {
