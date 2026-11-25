@@ -1,6 +1,6 @@
 # colorblind
 
-[![Deploy](https://github.com/andrewmacheret/colorblind/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/colorblind/actions/workflows/deploy.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/colorblind/blob/master/LICENSE.md)
+[![Deploy](https://github.com/andrewmacheret/colorblind/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/colorblind/actions/workflows/deploy.yml) [![Canary](https://github.com/andrewmacheret/colorblind/actions/workflows/canary.yml/badge.svg)](https://github.com/andrewmacheret/colorblind/actions/workflows/canary.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/colorblind/blob/master/LICENSE.md)
 
 A web-based color blindness simulator, in plain JavaScript with an HTML canvas. No libraries.
 
@@ -18,6 +18,10 @@ python3 -m http.server
 ```
 
 Then open [http://localhost:8000](http://localhost:8000). You should see a photo with filter buttons next to it, and the buttons should change how the photo looks. The dropdown switches between the sample images in `www/`.
+
+## Health check
+
+[`/projects/colorblind/healthcheck/`](https://andrewmacheret.com/projects/colorblind/healthcheck/) checks the page and its scripts and styles. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Deploy
 
