@@ -21,7 +21,7 @@ Then open [http://localhost:8000](http://localhost:8000). You should see a photo
 
 ## Health check
 
-[`/projects/colorblind/healthcheck/`](https://andrewmacheret.com/projects/colorblind/healthcheck/) checks the page and its scripts and styles. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
+Once a day, the Canary workflow (`.github/workflows/canary.yml`) checks the page and its scripts and styles. It's started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Deploy
 
